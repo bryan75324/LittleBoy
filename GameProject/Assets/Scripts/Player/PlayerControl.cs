@@ -5,24 +5,24 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-
     private float m_speedX = 3f;
-    private float m_speedLeft = 3f;
     private float m_speedY = 150f;
     private float playerMove;
     private Rigidbody2D m_Rigidbody2D;
+
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         playerMove = Input.GetAxis("Horizontal");
         transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
     }
+
     private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -34,6 +34,7 @@ public class PlayerControl : MonoBehaviour
             m_Rigidbody2D.velocity = new Vector2(0f, -1.0f);
         }
     }
+
     /// <summary>
     /// 水平速度變化，參數傳遞-2~2
     /// </summary>
@@ -42,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     {
         m_Rigidbody2D.velocity = new Vector2(speedX, 0f);
     }
+
     /// <summary>
     /// 往上跳躍
     /// </summary>
