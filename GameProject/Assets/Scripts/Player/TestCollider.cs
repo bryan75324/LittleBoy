@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TestCollider : MonoBehaviour
 {
-
-    PlayerControl PC = new PlayerControl();
+    PlayerControl PC;
+    PlayerData PD;
     // Use this for initialization
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -17,13 +17,18 @@ public class TestCollider : MonoBehaviour
     {
 
     }
-    public void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.name == "Character")
-        {
-            Debug.Log("Trigger Enter");
-            PC.SetSpeedVarietyY(5);
-        }
+        //if (other.gameObject.name == "Character")
+        //{
+        //    PC = other.transform.GetComponent<PlayerControl>();
+        //    Debug.Log("Trigger Enter");
+        //    PC.SetSpeedVarietyY(5f);
 
+        //    PD = other.transform.GetComponent<PlayerData>();
+        //    PD.Damaged(3);
+        //    Debug.Log(PD.PlayerHP.ToString());
+        //}
     }
+
 }
