@@ -4,23 +4,21 @@ using UnityEngine;
 
 namespace MapSystem
 {
-    public class Standard : MapElement
+    public class MEDangerous : MapElement
     {
-        [SerializeField] private uint m_Width = 1;
+        [SerializeField] private int m_Width;
+        [SerializeField] [Range(0, 10)] private int m_Damage;
 
         protected override void Awake()
         {
             base.Awake();
 
-            m_SpriteRenderers = m_Display.GetComponentInChildren<SpriteRenderer>();
-            m_BoxCollider2Ds = m_Display.GetComponentInChildren<BoxCollider2D>();
-            m_OriginSize = m_SpriteRenderers.size;
+            m_MEScaler = m_Display.AddComponent<MEScaler>();
         }
 
         private void OnEnable()
         {
-            m_SpriteRenderers.size = Vector3.Scale(m_OriginSize, new Vector3(m_Width, 1.0f, 1.0f));
-            m_BoxCollider2Ds.size = m_SpriteRenderers.size;
+            m_MEScaler.Resize(m_Width);
         }
 
         // Use this for initialization
@@ -33,13 +31,20 @@ namespace MapSystem
         {
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "Player")
+            {
+                PlayerData pd = collision.GetComponent<PlayerData>();
+                pd.Damaged(m_Damage);
+            }
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(new Vector3(0.64f, 0.64f, 0.0f), new Vector3(m_Width, 1.0f, 1.0f)));
         }
 
-        private Vector3 m_OriginSize;
-        private SpriteRenderer m_SpriteRenderers;
-        private BoxCollider2D m_BoxCollider2Ds;
+        private MEScaler m_MEScaler;
     }
 }

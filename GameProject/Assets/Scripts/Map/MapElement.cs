@@ -6,11 +6,11 @@ namespace MapSystem
 {
     public class MapElement : MonoBehaviour
     {
-        [SerializeField] private AudioClip m_Sound;
+        public GameObject m_Display;
 
         protected virtual void Awake()
         {
-            m_Display = ResourceManager.Instance.LoadObject(typeof(GameObject), "ME_001", "MapElement/Prefabs/MapElement") as GameObject;
+            this.gameObject.tag = "Terrain";
             m_Display = Instantiate(m_Display, this.transform);
         }
 
@@ -30,13 +30,6 @@ namespace MapSystem
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            SoundEffect();
         }
-
-        private void SoundEffect()
-        {
-        }
-
-        protected GameObject m_Display;
     }
 }
