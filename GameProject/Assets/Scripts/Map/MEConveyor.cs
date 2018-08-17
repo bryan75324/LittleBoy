@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MEDangerous : MEStandard
+public class MEConveyor : MEStandard
 {
-    [SerializeField] private int m_Damage;
+    [SerializeField] private float m_speed;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            PlayerData pd = collision.GetComponent<PlayerData>();
-            pd.Damaged(m_Damage);
+            PlayerControl pc = collision.GetComponent<PlayerControl>();
+            pc.SetSpeedVarietyX(m_speed);
         }
     }
 }

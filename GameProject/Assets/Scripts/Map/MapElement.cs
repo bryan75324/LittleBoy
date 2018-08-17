@@ -2,34 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapSystem
+public class MapElement : MonoBehaviour
 {
-    public class MapElement : MonoBehaviour
+    public GameObject m_display;
+    public AudioClip m_audioClip;
+
+    protected virtual void Awake()
     {
-        public GameObject m_Display;
+        this.gameObject.tag = "Terrain";
+        m_display = Instantiate(m_display, this.transform);
+    }
 
-        protected virtual void Awake()
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_audioClip != null)
         {
-            this.gameObject.tag = "Terrain";
-            m_Display = Instantiate(m_Display, this.transform);
-        }
-
-        private void OnEnable()
-        {
-        }
-
-        // Use this for initialization
-        private void Start()
-        {
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
+            AudioSource.PlayClipAtPoint(m_audioClip, this.transform.position);
         }
     }
 }
