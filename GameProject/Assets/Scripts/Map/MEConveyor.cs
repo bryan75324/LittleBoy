@@ -6,12 +6,13 @@ public class MEConveyor : MEStandard
 {
     [SerializeField] private float m_speed;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            PlayerControl pc = collision.GetComponent<PlayerControl>();
+            PlayerControl pc = collision.gameObject.GetComponent<PlayerControl>();
             pc.SetSpeedVarietyX(m_speed);
+            Debug.Log("Set speed.");
         }
     }
 }

@@ -22,7 +22,5 @@ public class MEStandard : MapElement
         Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(new Vector3(0.64f, 0.64f, 0.0f), new Vector3(m_Width, 1.0f, 1.0f)));
     }
 
-    private float m_Damage = 0.0f;
-    private Animator m_Animator;
     private MEScaler m_MEScaler;
 }
