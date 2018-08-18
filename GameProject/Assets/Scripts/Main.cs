@@ -5,6 +5,8 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     public static Main Instance;
+    public Camera gameCamera;
+    public float scrollSpeed;
 
     private void Awake()
     {
@@ -26,11 +28,13 @@ public class Main : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        if (gameCamera == null) gameCamera = Camera.main;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        gameCamera.transform.position += Vector3.down * scrollSpeed;
     }
 
     private AssetManager m_AssetManager;
