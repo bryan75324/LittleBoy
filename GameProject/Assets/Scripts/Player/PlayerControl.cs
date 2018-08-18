@@ -8,14 +8,18 @@ public class PlayerControl : MonoBehaviour
     private float m_speedX = 3f;
     private float m_speedY;
     private float playerMove;
+
     private bool isGround = false;
     private int jumpCount = 0;
+
     private Rigidbody2D m_Rigidbody2D;
+    private Animator m_PlayerAnimator;
 
     // Use this for initialization
     private void Start()
     {
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();
+        m_PlayerAnimator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,11 +35,14 @@ public class PlayerControl : MonoBehaviour
         }
         playerMove = Input.GetAxis("Horizontal");
         transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
+
+        m_PlayerAnimator.SetInteger("playerMoveMode", (int)playerMove*10);
+
     }
 
     private void FixedUpdate()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             if (jumpCount == 0)
