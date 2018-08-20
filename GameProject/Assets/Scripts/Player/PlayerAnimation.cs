@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-
-    public static GameObject Character;
+    
     private Animator m_PlayerAnimator;
     private float m_Highest;
     // Use this for initialization
     void Start()
     {
         m_PlayerAnimator = GetComponent<Animator>();
-        Instantiate(Character);
         m_Highest = this.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(m_Highest);
         if (this.transform.position.y > m_Highest)
         {
             m_Highest = this.transform.position.y;

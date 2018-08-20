@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     private float m_speedY;
     private float playerMove;
 
+    private RaycastHit2D m_JumpRay;
     private bool isGround = false;
     private int jumpCount = 0;
 
@@ -23,6 +24,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             m_speedX = 10f;
@@ -33,6 +35,14 @@ public class PlayerControl : MonoBehaviour
         }
         playerMove = Input.GetAxis("Horizontal");
         transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
+
+        m_JumpRay = Physics2D.Raycast(transform.position, -transform.up, 1, 1 << LayerMask.NameToLayer("Terrain"));
+        if (m_JumpRay.collider)
+        {
+            Debug.Log(m_JumpRay.transform.name);
+            isGround = true;
+        }
+        Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1), Color.red);
     }
 
     private void FixedUpdate()
@@ -40,34 +50,14 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-            if (jumpCount == 0)
-            {
                 m_speedY = 5f;
                 m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
-            }
-            if (jumpCount == 1)
-            {
-                m_speedY = 7f;
-                m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
-            }
-            jumpCount += 1;
-            if (jumpCount > 1)
-            {
+            
                 isGround = false;
-            }
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
             m_Rigidbody2D.velocity = new Vector2(0f, -1.0f);
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        if (LayerMask.LayerToName(collision.gameObject.layer) == "Terrain")
-        {
-            isGround = true;
-            jumpCount = 0;
         }
     }
     /// <summary>
