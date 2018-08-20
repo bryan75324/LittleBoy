@@ -8,8 +8,10 @@ public class PlayerControl : MonoBehaviour
     private float m_speedX = 3f;
     private float m_speedY;
     private float playerMove;
+
     private bool isGround = false;
     private int jumpCount = 0;
+
     private Rigidbody2D m_Rigidbody2D;
 
     // Use this for initialization
@@ -35,7 +37,7 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             if (jumpCount == 0)
