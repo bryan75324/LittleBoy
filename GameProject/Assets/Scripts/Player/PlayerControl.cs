@@ -8,6 +8,9 @@ public class PlayerControl : MonoBehaviour
     private float m_speedX = 3f;
     private float m_speedY;
     private float playerMove;
+    private float m_Highest;
+    private Animator m_PlayerAnimator;
+
 
     private RaycastHit2D m_JumpRay;
     private bool isGround = false;
@@ -19,23 +22,31 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();
+        m_PlayerAnimator = GetComponentInChildren<Animator>();
+        m_Highest = this.transform.position.y;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (this.transform.position.y > m_Highest)
+        {
+            m_Highest = this.transform.position.y;
+        }
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            m_speedX = 10f;
-        }
-        else
-        {
-            m_speedX = 3f;
-        }
+        m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
+
         playerMove = Input.GetAxis("Horizontal");
         transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
 
+        m_PlayerAnimator.SetFloat("playerMove", playerMove);
+
+        if (this.transform.position.y < m_Highest)
+        {
+            m_PlayerAnimator.SetBool("playerJump", false);
+            m_PlayerAnimator.SetBool("playerFull", true);
+            m_Highest = this.transform.position.y;
+        }
         m_JumpRay = Physics2D.Raycast(transform.position, -transform.up, 1, 1 << LayerMask.NameToLayer("Terrain"));
         if (m_JumpRay.collider)
         {
@@ -50,14 +61,23 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-                m_speedY = 5f;
-                m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
-            
-                isGround = false;
+            m_speedY = 5f;
+            m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
+
+            m_PlayerAnimator.SetBool("playerJump", true);
+            isGround = false;
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
             m_Rigidbody2D.velocity = new Vector2(0f, -1.0f);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Terrain")
+        {
+            m_PlayerAnimator.SetBool("playerFull", false);
         }
     }
     /// <summary>
