@@ -39,12 +39,11 @@ public class PlayerControl : MonoBehaviour
         playerMove = Input.GetAxis("Horizontal");
         transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
 
-        m_PlayerAnimator.SetFloat("playerMove", playerMove);
+        m_PlayerAnimator.SetFloat("Speed", playerMove);
 
         if (this.transform.position.y < m_Highest)
         {
-            m_PlayerAnimator.SetBool("playerJump", false);
-            m_PlayerAnimator.SetBool("playerFull", true);
+            m_PlayerAnimator.SetBool("Fall", true);
             m_Highest = this.transform.position.y;
         }
         m_JumpRay = Physics2D.Raycast(transform.position, -transform.up, 1, 1 << LayerMask.NameToLayer("Terrain"));
@@ -64,7 +63,7 @@ public class PlayerControl : MonoBehaviour
             m_speedY = 5f;
             m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
 
-            m_PlayerAnimator.SetBool("playerJump", true);
+            m_PlayerAnimator.SetTrigger("Jump");
             isGround = false;
         }
         if (Input.GetKey(KeyCode.LeftControl))
@@ -77,7 +76,7 @@ public class PlayerControl : MonoBehaviour
 
         if (LayerMask.LayerToName(collision.gameObject.layer) == "Terrain")
         {
-            m_PlayerAnimator.SetBool("playerFull", false);
+            m_PlayerAnimator.SetBool("Fall", false);
         }
     }
     /// <summary>

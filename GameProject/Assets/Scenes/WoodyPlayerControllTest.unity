@@ -308,53 +308,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &779707677
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 3.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114514872716681302, guid: 19b6820faeefb24418bc34b6416d53e9,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &819081322
 Prefab:
   m_ObjectHideFlags: 0
@@ -454,6 +407,48 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aca27ea6289af3c4f9e077d5a0149a57, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &867184755
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085288342484118, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 19b6820faeefb24418bc34b6416d53e9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1217501655
 GameObject:
