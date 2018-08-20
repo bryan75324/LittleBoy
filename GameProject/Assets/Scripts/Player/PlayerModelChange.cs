@@ -16,6 +16,6 @@ public class PlayerModelChange : MonoBehaviour {
 	}
     public void ChangePlayerModel()
     {
-        PlayerAnimation.Character = Resources.Load("PlayerMain") as GameObject;
+
     }
 }

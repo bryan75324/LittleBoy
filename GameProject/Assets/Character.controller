@@ -8,12 +8,6 @@ AnimatorController:
   m_Name: Character
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: playerMove
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: playerJump
     m_Type: 4
     m_DefaultFloat: 0
@@ -22,6 +16,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: playerFull
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: playerMove
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -142,9 +142,9 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 3
     m_ConditionEvent: playerMove
-    m_EventTreshold: 1
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102948712642309204}
   m_Solo: 0
@@ -190,9 +190,9 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
+  - m_ConditionMode: 4
     m_ConditionEvent: playerMove
-    m_EventTreshold: -1
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102648379648565438}
   m_Solo: 0
@@ -373,16 +373,16 @@ AnimatorStateMachine:
     m_Position: {x: 252, y: 108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102648379648565438}
-    m_Position: {x: 576, y: -228, z: 0}
+    m_Position: {x: 576, y: -192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102948712642309204}
-    m_Position: {x: 372, y: -120, z: 0}
+    m_Position: {x: 336, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102068545467027312}
-    m_Position: {x: 48, y: -120, z: 0}
+    m_Position: {x: -12, y: -108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102746914494412966}
-    m_Position: {x: 192, y: -204, z: 0}
+    m_Position: {x: 120, y: -60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101050241519673576}
