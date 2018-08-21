@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+    public GameObject m_CharaterModel;
+    private PlayerModelChange PMC;
+    private int m_PlayerHP = 10;
 
-    private int m_PlayerHP=10;
-
+    private void Start()
+    {
+        
+        PMC = GetComponent<PlayerModelChange>();
+        m_CharaterModel = PMC.m_Character as GameObject;
+        Instantiate(GetComponent<PlayerModelChange>().m_Character as GameObject);
+    }
     public int PlayerHP
     {
         get
@@ -25,4 +33,6 @@ public class PlayerData : MonoBehaviour
     {
         PlayerHP -= number;
     }
+
+
 }

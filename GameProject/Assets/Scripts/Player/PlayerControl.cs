@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour
 {
     private float m_speedX = 3f;
-    private float m_speedY;
-    private float playerMove;
+    private float m_speedY = 5f;
+    private float m_PlayerMove;
+    private float m_PlayerJump;
     private float m_Highest;
     private Animator m_PlayerAnimator;
 
@@ -35,11 +36,28 @@ public class PlayerControl : MonoBehaviour
         }
 
         m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
+        m_PlayerAnimator.speed = (m_speedX == 10f) ? 10 : 1;
 
-        playerMove = Input.GetAxis("Horizontal");
-        transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
 
-        m_PlayerAnimator.SetFloat("Speed", playerMove);
+        m_PlayerMove = Input.GetAxis("Horizontal");
+        m_PlayerJump = Input.GetAxis("Jump");
+
+
+        transform.position += transform.right * System.Math.Abs(m_PlayerMove) * m_speedX * Time.deltaTime;
+
+        if (m_PlayerMove > 0)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (m_PlayerMove < 0)
+        {
+            transform.localEulerAngles = new Vector3(0, 180, 0);
+        }
+
+        m_PlayerAnimator.SetFloat("Speed", System.Math.Abs(m_PlayerMove));
+
+
+
 
         if (this.transform.position.y < m_Highest)
         {
@@ -49,18 +67,14 @@ public class PlayerControl : MonoBehaviour
         m_JumpRay = Physics2D.Raycast(transform.position, -transform.up, 1, 1 << LayerMask.NameToLayer("Terrain"));
         if (m_JumpRay.collider)
         {
-            Debug.Log(m_JumpRay.transform.name);
             isGround = true;
         }
-        Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1), Color.red);
     }
 
     private void FixedUpdate()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (m_PlayerJump > 0 && isGround)
         {
-            m_speedY = 5f;
             m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
 
             m_PlayerAnimator.SetTrigger("Jump");
