@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    private float m_speedX = 3f;
-    private float m_speedY = 5f;
+    private Player m_Player;
     private float m_PlayerMove;
     private float m_PlayerJump;
     private float m_Highest;
     private Animator m_PlayerAnimator;
-
 
     private RaycastHit2D m_JumpRay;
     private bool isGround = false;
@@ -22,8 +20,11 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        m_Player = GameObject.Find("Main").GetComponent<MainTest>().player;
+        GameObject.Instantiate(m_Player.m_CharaterModel, this.transform);
+
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();
-        m_PlayerAnimator = GetComponentInChildren<Animator>();
+        m_PlayerAnimator = this.GetComponentInChildren<Animator>();
         m_Highest = this.transform.position.y;
     }
 
@@ -35,15 +36,15 @@ public class PlayerControl : MonoBehaviour
             m_Highest = this.transform.position.y;
         }
 
-        m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
-        m_PlayerAnimator.speed = (m_speedX == 10f) ? 10 : 1;
+        m_Player.m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
+        m_PlayerAnimator.speed = (m_Player.m_speedX == 10f) ? 10 : 1;
 
 
         m_PlayerMove = Input.GetAxis("Horizontal");
         m_PlayerJump = Input.GetAxis("Jump");
 
 
-        transform.position += transform.right * System.Math.Abs(m_PlayerMove) * m_speedX * Time.deltaTime;
+        transform.position += transform.right * System.Math.Abs(m_PlayerMove) * m_Player.m_speedX * Time.deltaTime;
 
         if (m_PlayerMove > 0)
         {
@@ -75,7 +76,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (m_PlayerJump > 0 && isGround)
         {
-            m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
+            m_Rigidbody2D.velocity = new Vector2(0f, m_Player.m_speedY);
 
             m_PlayerAnimator.SetTrigger("Jump");
             isGround = false;
