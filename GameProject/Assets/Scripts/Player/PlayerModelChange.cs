@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerModelChange : MonoBehaviour
 {
     public Player m_Player;
+    int aa;
 
     public void Start()
     {
