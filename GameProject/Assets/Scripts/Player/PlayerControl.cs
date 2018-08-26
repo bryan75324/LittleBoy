@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        m_Player = GameObject.Find("Main").GetComponent<MainTest>().player;
+        m_Player = GameObject.Find("Main").GetComponent<PlayerData>().m_Player;
         GameObject.Instantiate(m_Player.m_CharaterModel, this.transform);
 
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();

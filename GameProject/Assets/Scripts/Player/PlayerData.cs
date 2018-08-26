@@ -13,6 +13,11 @@ public class PlayerData : MonoBehaviour
 {
     public Player m_Player;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        m_Player = new Player();
+    }
     private void Start()
     {
         
