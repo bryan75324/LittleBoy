@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WoodyPlayerControllTest.unity
     guid: 34e689955d1dcec4f95d9ea2c2fe82d0
+  - enabled: 1
+    path: Assets/Scenes/SelectCharater.unity
+    guid: 05c16b63526a23f479c495a532051ca6

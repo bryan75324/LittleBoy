@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class Player
 {
-    public float m_speedX = 3f;
-    public float m_speedY = 5f;
-    public int m_PlayerHP = 10;
+    public float m_speedX;
+    public float m_speedY;
+    public int m_PlayerHP;
     public GameObject m_CharaterModel;
+
+    public void Clone(Player other)
+    {
+        m_speedX = other.m_speedX;
+        m_speedY = other.m_speedY;
+        m_PlayerHP = other.m_PlayerHP;
+        m_CharaterModel = other.m_CharaterModel;
+    }
 }
+
 public class PlayerData : MonoBehaviour
 {
-    public Player m_Player;
+    public static PlayerData Instance;
+
+    public Player m_Player ;
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this.gameObject);
+
         DontDestroyOnLoad(this);
         m_Player = new Player();
-    }
-    private void Start()
-    {
-        
     }
     
     public void Damaged(int number)
