@@ -7,13 +7,14 @@ public class PlayerControl : MonoBehaviour
 {
     private Player m_Player;
     private float m_PlayerMove;
+    private float m_SpeedX;
+    private float m_SpeedXUp;
     private float m_PlayerJump;
     private float m_Highest;
     private Animator m_PlayerAnimator;
 
     private RaycastHit2D m_JumpRay;
     private bool isGround = false;
-    private int jumpCount = 0;
 
     private Rigidbody2D m_Rigidbody2D;
 
@@ -23,6 +24,8 @@ public class PlayerControl : MonoBehaviour
         m_Player = GameObject.Find("Main").GetComponent<PlayerData>().m_Player;
         GameObject.Instantiate(m_Player.m_CharaterModel, this.transform);
 
+        m_SpeedX = m_Player.m_speedX;
+        m_SpeedXUp = m_Player.m_speedX * 1.5f;
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();
         m_PlayerAnimator = this.GetComponentInChildren<Animator>();
         m_Highest = this.transform.position.y;
@@ -31,13 +34,14 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Debug.Log(m_Player.m_speedX);
         if (this.transform.position.y > m_Highest)
         {
             m_Highest = this.transform.position.y;
         }
 
-        m_Player.m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
-        m_PlayerAnimator.speed = (m_Player.m_speedX == 10f) ? 10 : 1;
+        m_Player.m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? m_SpeedXUp : m_SpeedX;
+        m_PlayerAnimator.speed = (m_Player.m_speedX == m_SpeedXUp) ? 5 : 1;
 
 
         m_PlayerMove = Input.GetAxis("Horizontal");
