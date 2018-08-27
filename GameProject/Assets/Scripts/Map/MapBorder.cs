@@ -17,6 +17,18 @@ public class MapBorder : MonoBehaviour
 
         this.transform.position = CameraPosition;
 
+        InitBorderPosSize();
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (gameCamera != null)
+            this.transform.position = CameraPosition;
+    }
+
+    private void InitBorderPosSize()
+    {
         float CameraHeight = gameCamera.pixelHeight;
         float CameraWidth = gameCamera.pixelWidth;
         float CameraScale = gameCamera.orthographicSize / 6.4f;
@@ -44,12 +56,6 @@ public class MapBorder : MonoBehaviour
         Vector2 LRBorderSize = new Vector2(1.0f, CameraHeight * 0.01f * CameraScale);
         rightCollider.size = LRBorderSize;
         leftCollider.size = LRBorderSize;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        this.transform.position = CameraPosition;
     }
 
     private Vector2 CameraPosition { get { return gameCamera.transform.position; } }
