@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    private float m_speedX = 3f;
-    private float m_speedY;
-    private float playerMove;
+    private Player m_Player;
+    private float m_PlayerMove;
+    private float m_PlayerJump;
     private float m_Highest;
     private Animator m_PlayerAnimator;
-
 
     private RaycastHit2D m_JumpRay;
     private bool isGround = false;
@@ -21,8 +20,11 @@ public class PlayerControl : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        m_Player = GameObject.Find("Main").GetComponent<PlayerData>().m_Player;
+        GameObject.Instantiate(m_Player.m_CharaterModel, this.transform);
+
         m_Rigidbody2D = this.GetComponent<Rigidbody2D>();
-        m_PlayerAnimator = GetComponentInChildren<Animator>();
+        m_PlayerAnimator = this.GetComponentInChildren<Animator>();
         m_Highest = this.transform.position.y;
     }
 
@@ -34,37 +36,49 @@ public class PlayerControl : MonoBehaviour
             m_Highest = this.transform.position.y;
         }
 
-        m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
+        m_Player.m_speedX = (Input.GetKey(KeyCode.LeftShift)) ? 10f : 3f;
+        m_PlayerAnimator.speed = (m_Player.m_speedX == 10f) ? 10 : 1;
 
-        playerMove = Input.GetAxis("Horizontal");
-        transform.position += transform.right * playerMove * m_speedX * Time.deltaTime;
 
-        m_PlayerAnimator.SetFloat("playerMove", playerMove);
+        m_PlayerMove = Input.GetAxis("Horizontal");
+        m_PlayerJump = Input.GetAxis("Jump");
+
+
+        transform.position += transform.right * System.Math.Abs(m_PlayerMove) * m_Player.m_speedX * Time.deltaTime;
+
+        if (m_PlayerMove > 0)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (m_PlayerMove < 0)
+        {
+            transform.localEulerAngles = new Vector3(0, 180, 0);
+        }
+
+        m_PlayerAnimator.SetFloat("Speed", System.Math.Abs(m_PlayerMove));
+
+
+
 
         if (this.transform.position.y < m_Highest)
         {
-            m_PlayerAnimator.SetBool("playerJump", false);
-            m_PlayerAnimator.SetBool("playerFull", true);
+            m_PlayerAnimator.SetBool("Fall", true);
             m_Highest = this.transform.position.y;
         }
         m_JumpRay = Physics2D.Raycast(transform.position, -transform.up, 1, 1 << LayerMask.NameToLayer("Terrain"));
         if (m_JumpRay.collider)
         {
-            Debug.Log(m_JumpRay.transform.name);
             isGround = true;
         }
-        Debug.DrawLine(transform.position, transform.position + new Vector3(0, -1), Color.red);
     }
 
     private void FixedUpdate()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (m_PlayerJump > 0 && isGround)
         {
-            m_speedY = 5f;
-            m_Rigidbody2D.velocity = new Vector2(0f, m_speedY);
+            m_Rigidbody2D.velocity = new Vector2(0f, m_Player.m_speedY);
 
-            m_PlayerAnimator.SetBool("playerJump", true);
+            m_PlayerAnimator.SetTrigger("Jump");
             isGround = false;
         }
         if (Input.GetKey(KeyCode.LeftControl))
@@ -77,7 +91,7 @@ public class PlayerControl : MonoBehaviour
 
         if (LayerMask.LayerToName(collision.gameObject.layer) == "Terrain")
         {
-            m_PlayerAnimator.SetBool("playerFull", false);
+            m_PlayerAnimator.SetBool("Fall", false);
         }
     }
     /// <summary>
